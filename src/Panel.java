@@ -12,19 +12,17 @@ import java.util.List;
 /**
  * Created by Iosif on 14.06.2014.
  */
-public class Panel extends JPanel{
+public class Panel extends JPanel {
 
-    JButton printLog;
-    JTextField adressField;
-    JTextArea result;
+    private final JButton printLog;
+    private final JTextField adressField;
+    private final JTextArea result;
 
     public Panel() {
-
         printLog = new JButton("Print log");
         adressField = new JTextField(40);
         setLayout(new FlowLayout(FlowLayout.LEFT));
         result = new JTextArea();
-
         add(adressField);
         add(printLog);
         add(result);
@@ -33,7 +31,7 @@ public class Panel extends JPanel{
     }
 
     private class Printer implements ActionListener {
-        public void actionPerformed(ActionEvent event){
+        public void actionPerformed(ActionEvent event) {
             List<String> log = new ArrayList<String>();
             try {
                 List<String> command = new ArrayList<String>();
@@ -41,22 +39,20 @@ public class Panel extends JPanel{
                 command.add("reflog");
                 ProcessBuilder builder = new ProcessBuilder(command);
                 builder.directory(new File(adressField.getText()));
+                builder.redirectErrorStream(true);//если считывать отдельно ErrorStream, почему-то иногда виснет.
                 Process process = builder.start();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
                 String nextLine;
+                String res = "";
+                result.setText("");
                 while ((nextLine = reader.readLine()) != null) {
-                    log.add(nextLine);
+                        res = res + nextLine + "\n";
                 }
+                result.setText(res);
+                reader.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                result.setText("Something has gone wrong. Probably, incorrect directory");
             }
-            result.setText("");
-            for(int i = 0; i < log.size(); i++){
-                result.setText(result.getText() + log.get(i) + "\n");
-            }
-
-
         }
     }
 }
