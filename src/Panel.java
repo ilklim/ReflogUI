@@ -10,11 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Iosif on 14.06.2014.
- */
-//todo delete
-
 //todo closing streams
 //todo composition
 //todo reflog keys
