@@ -25,7 +25,6 @@ public class Panel {
                 try {
                     result.setText(Parser.printParsedLog(LogReader.read(adressField.getText())));
                 } catch (Exception e1) {
-
                     result.setText("Something has gone wrong. Probably, incorrect directory");
                 }
             }
