@@ -3,9 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 //todo composition
 //todo reflog keys
@@ -26,7 +23,16 @@ public class Panel extends JPanel {
         add(printLog);
         add(sp);
         Printer printer = new Printer();
-        printLog.addActionListener(printer);
+        printLog.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    result.setText(LogReader.read(adressField.getText()));
+                } catch (Exception e1) {
+                    result.setText("Something has gone wrong. Probably, incorrect directory");
+                }
+            }
+        });
     }
 
     private class Printer implements ActionListener {
