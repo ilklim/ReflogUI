@@ -3,25 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//todo composition
 //todo reflog keys
 
-public class Panel extends JPanel {
+public class Panel {
 
-    private final JButton printLog;
-    private final JTextField adressField;
-    private final JTextArea result;
+    public static JPanel createReflogPanel() {
+        final JPanel panel = new JPanel();
+        final JButton printLog = new JButton("Print log");
+        final JTextField adressField = new JTextField(40);
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        final JTextArea result = new JTextArea(12, 45);
+        final JScrollPane sp = new JScrollPane(result);
 
-    public Panel() {
-        printLog = new JButton("Print log");
-        adressField = new JTextField(40);
-        setLayout(new FlowLayout(FlowLayout.LEFT));
-        result = new JTextArea(12, 45);
-        JScrollPane sp = new JScrollPane(result);
-
-        add(adressField);
-        add(printLog);
-        add(sp);
+        panel.add(adressField);
+        panel.add(printLog);
+        panel.add(sp);
 
         printLog.addActionListener(new ActionListener() {
             @Override
@@ -34,5 +30,6 @@ public class Panel extends JPanel {
                 }
             }
         });
+        return panel;
     }
 }
