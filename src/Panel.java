@@ -2,15 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//todo closing streams
 //todo composition
 //todo reflog keys
 
@@ -35,15 +31,18 @@ public class Panel extends JPanel {
 
     private class Printer implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            ProcessBuilder builder = new ProcessBuilder("git", "reflog");
+            builder.directory(new File(adressField.getText()));
+            builder.redirectErrorStream(true);
+
+            Process process = null;
             try {
-                ProcessBuilder builder = new ProcessBuilder("git", "reflog");
-                builder.directory(new File(adressField.getText()));
-                builder.redirectErrorStream(true);
+                 process = builder.start();
+            } catch (IOException e) {
+                result.setText("Something has gone wrong. Probably, incorrect directory");
+            }
 
-                Process process = builder.start();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
+            try(BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 result.setText("");
                 StringBuilder res = new StringBuilder("");
                 String nextLine;
@@ -51,8 +50,7 @@ public class Panel extends JPanel {
                     res.append(nextLine + "\n");
                 }
                 result.setText(res.toString());
-                reader.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 result.setText("Something has gone wrong. Probably, incorrect directory");
             }
         }
