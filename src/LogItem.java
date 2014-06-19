@@ -27,4 +27,13 @@ public class LogItem {
     public String getMessage() {
         return this.message;
     }
+
+    public String toString() {
+        if (number != -1) {
+            return "№" + this.number + "   key: " + this.key +
+                    "   action: " + this.action.toUpperCase() + "   message: " + this.message.toUpperCase();
+        } else {
+            return this.message;
+        }
+    }
 }

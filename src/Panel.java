@@ -27,7 +27,7 @@ public class Panel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    result.setText(LogReader.read(adressField.getText()));
+                    result.setText(Parser.printParsedLog(LogReader.read(adressField.getText())));
                 } catch (Exception e1) {
 
                     result.setText("Something has gone wrong. Probably, incorrect directory");
