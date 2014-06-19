@@ -1,8 +1,12 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="ReflogUI:jar">
+  <artifact type="jar" build-on-make="true" name="ReflogUI:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/ReflogUI_jar</output-path>
     <root id="archive" name="ReflogUI.jar">
       <element id="module-output" name="ReflogUI" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/out/META-INF/MANIFEST.MF" />
+      </element>
     </root>
   </artifact>
 </component>
