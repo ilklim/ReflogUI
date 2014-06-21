@@ -1,3 +1,5 @@
+package LogItems;
+
 public abstract class AbstractLogItem {
     private final int number;
     private final String key;
@@ -21,5 +23,9 @@ public abstract class AbstractLogItem {
         return message;
     }
 
-    abstract String getAction();
+    public String toString() {
+        return "" + getNumber() + "   " + getKey() + "   " + getAction() + "   " + "\"" + getMessage()+ "\"";
+    }
+
+    abstract public String getAction();
 }
