@@ -10,7 +10,7 @@ public class Panel {
     public static JPanel createReflogPanel() {
         final JPanel panel = new JPanel();
         final JButton printLog = new JButton("Print log");
-        final JTextField adressField = new JTextField(40);
+        final JTextField adressField = new JTextField(System.getProperty("user.dir"), 40);
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         final JTextArea result = new JTextArea(12, 45);
         final JScrollPane sp = new JScrollPane(result);
