@@ -23,6 +23,6 @@ public class Checkout extends AbstractLogItem {
     }
 
     public String toString() {
-        return "" + getNumber() + "   " + getKey() + "   " + getAction() + "   " + "from" + "   " + getFrom() + "   to" + getTo();
+        return "" + getNumber() + "   " + getKey() + "   " + getAction() + "   " + "from" + "   " + getFrom() + "   to   " + getTo();
     }
 }

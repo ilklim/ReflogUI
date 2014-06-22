@@ -12,6 +12,6 @@ public class FatalItem extends AbstractLogItem {
     }
 
     public String toString() {
-        return getAction() + ":   " + "\"" + getMessage()+ "\"";
+        return getAction() + ":   " + getMessage();
     }
 }
