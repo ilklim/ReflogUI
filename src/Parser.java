@@ -59,8 +59,13 @@ public class Parser {
             switch (s) {
                 case "(initial)": return "InitialCommit";
                 case "(amend)": return "AmendingCommit";
-                case  "merge": return "merge";
-                default: return "Unknown";
+                default: {
+                    if (preAction[0].equalsIgnoreCase("merge")) {
+                        return "Merge";
+                    } else {
+                        return "Unknown";
+                    }
+                }
             }
         }
     }
