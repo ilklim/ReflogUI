@@ -36,7 +36,7 @@ public class Parser {
     public static ArrayList<AbstractLogItem> parse(String log) {
         String[] lines = log.split("\n");
         ArrayList<AbstractLogItem> res = new ArrayList<>();
-        for (int i = 0; i < lines.length; i++) {
+        for (int i = lines.length-1; i >= 0; i--) {
             res.add(parseLine(lines[i]));
         }
         return res;
@@ -45,7 +45,7 @@ public class Parser {
     public static String printParsedLog(String log) {
         StringBuilder res = new StringBuilder("");
         ArrayList<AbstractLogItem> parsed = parse(log);
-        for (int i = 0; i < parsed.size(); i++) {
+        for (int i = parsed.size()-1; i >= 0; i--) {
             res.append(parsed.get(i).toString() + "\n");
         }
         return res.toString();
