@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/src/GUI/GUI.iml" filepath="$PROJECT_DIR$/src/GUI/GUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/Logic/Logic.iml" filepath="$PROJECT_DIR$/src/Logic/Logic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/Main/Main.iml" filepath="$PROJECT_DIR$/src/Main/Main.iml" />
       <module fileurl="file://$PROJECT_DIR$/ReflogUI.iml" filepath="$PROJECT_DIR$/ReflogUI.iml" />
     </modules>
   </component>

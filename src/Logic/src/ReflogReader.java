@@ -12,8 +12,8 @@ public class ReflogReader {
         Process process = builder.start();
 
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-            StringBuilder res = new StringBuilder("");
             String nextLine;
+            StringBuilder res = new StringBuilder("");
             while ((nextLine = reader.readLine()) != null) {
                 res.append(nextLine).append("\n");
             }
