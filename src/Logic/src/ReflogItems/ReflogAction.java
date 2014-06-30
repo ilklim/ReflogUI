@@ -14,8 +14,8 @@ public enum ReflogAction {
     REBASE_FINISHED("rebase finished"),
     RESET("reset"),
     CHERRY_PICK("cherry-pick"),
-    PULL_REBASE("pull --rebase");
-
+    PULL_REBASE("pull --rebase"),
+    PULL("pull");
     private final String s;
     private ReflogAction(String s) {
         this.s = s;

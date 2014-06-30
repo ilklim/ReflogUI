@@ -3,6 +3,7 @@ import ReflogItems.*;
 import javax.swing.*;
 import javax.swing.text.Style;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +13,7 @@ public class Parser {
             System.out.println(line);
             return new ErrorReflogItem(line);
         } else {
+
             Pattern p = Pattern.compile("([0-9_a-f]*) HEAD@\\{(\\d*)\\}: (.*?):(?!//) (.*)");
             Matcher m = p.matcher(line);
             m.matches();
@@ -62,14 +64,20 @@ public class Parser {
                 case "reset":  return new GeneralReflogItem(number, hash, message, ReflogAction.RESET);
                 case "cherry-pick":  return new GeneralReflogItem(number, hash, message, ReflogAction.CHERRY_PICK);
                 case "pull": {
-                    if (splitedAction[1].equalsIgnoreCase("--rebase")) return new GeneralReflogItem(number, hash, message, ReflogAction.PULL_REBASE);
+                    if (splitedAction[1].equalsIgnoreCase("--rebase")) {
+                        return new GeneralReflogItem(number, hash, message, ReflogAction.PULL_REBASE);
+                    } else {
+                        return new PullReflogItem(number, hash, message, splitedAction[1], splitedAction[2]);
+                    }
+
                 }
-                default: {System.out.println(line); return new ErrorReflogItem("Unknown action in line: " + line);}
+
+                default: return new ErrorReflogItem("Unknown action in line: " + line);
             }
         }
     }
 
-    public static ArrayList<GeneralReflogItem> parse(String log) {
+    public static List<GeneralReflogItem> parse(String log) {
         String[] lines = log.split("\n");   //todo ask A.A.
         ArrayList<GeneralReflogItem> res = new ArrayList<>();
         for (int i = lines.length-1; i >= 0; i--) {
@@ -83,7 +91,7 @@ public class Parser {
     }
 
     public static void coloredPrint(String log, JTextPane pane, Style style) {
-        ArrayList<GeneralReflogItem> parsed = parse(log);
+        List<GeneralReflogItem> parsed = parse(log);
         pane.setText("");
         for (int i = parsed.size()-1; i >= 0; i--) {
             parsed.get(i).coloredPrint(pane, style);
